@@ -1,0 +1,31 @@
+service: telegram-bot-serverless
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  region: eu-west-1
+
+functions:
+  handle-message:
+    handler: src/handler.handleMessage
+    events:
+      - http: GET /
+      - http: POST /
+    environment:
+      TELEGRAM_TOKEN: ${ssm:telegram-bot-token}
+
+package:
+  individually: true
+  include:
+    - na-zare.ogg
+
+plugins:
+  - serverless-webpack
+
+custom:
+  webpack:
+    webpackConfig: webpack.config.js
+    includeModules: true
