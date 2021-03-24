@@ -1,5 +1,5 @@
 export const noYouDontWantTo = (str) => {
-  const re = new RegExp(/Дед,(.*) ли мне (.*)\?/);
+  const re = new RegExp(/Дед,(.*) ли мне (.*)\?/i);
   const words = str.match(re);
 
   if (words[2] === 'я') {
@@ -10,7 +10,7 @@ export const noYouDontWantTo = (str) => {
 };
 
 export const yesYouWantTo = (str) => {
-  const re = new RegExp(/Дед,(.*) ли мне (.*)\?/);
+  const re = new RegExp(/Дед,(.*) ли мне (.*)\?/i);
   const words = str.match(re);
 
   if (words[2] === 'я') {
@@ -21,21 +21,21 @@ export const yesYouWantTo = (str) => {
 };
 
 export const thisOrThisFirst = (str) => {
-  const re = new RegExp(/Дед, (.*) или (.*)\?/);
+  const re = new RegExp(/Дед, (.*) или (.*)\?/i);
   const words = str.match(re);
 
   return words[1];
 };
 
 export const thisOrThisSecond = (str) => {
-  const re = new RegExp(/Дед, (.*) или (.*)\?/);
+  const re = new RegExp(/Дед, (.*) или (.*)\?/i);
   const words = str.match(re);
 
   return words[2];
 };
 
 export const yesYouAre = (str) => {
-  const re = new RegExp(/Дед, (.*) ли (.*)\?/);
+  const re = new RegExp(/Дед, (.*) ли (.*)\?/i);
   const words = str.match(re);
 
   if (words[2] === 'я') {
@@ -46,7 +46,7 @@ export const yesYouAre = (str) => {
 };
 
 export const noYouAreNot = (str) => {
-  const re = new RegExp(/Дед, (.*) ли (.*)\?/);
+  const re = new RegExp(/Дед, (.*) ли (.*)\?/i);
   const words = str.match(re);
 
   if (words[2] === 'я') {
@@ -57,7 +57,7 @@ export const noYouAreNot = (str) => {
 };
 
 export const youWantIt = (str) => {
-  const re = new RegExp(/Дед, (.*) ли (.*)\?/);
+  const re = new RegExp(/Дед, (.*) ли (.*)\?/i);
   const words = str.match(re);
 
   if (words[2][0] === 'я') {
@@ -73,7 +73,7 @@ export const youWantIt = (str) => {
 };
 
 export const noYouDontWantIt = (str) => {
-  const re = new RegExp(/Дед, (.*) ли (.*)\?/);
+  const re = new RegExp(/Дед, (.*) ли (.*)\?/i);
   const words = str.match(re);
 
   if (words[2][0] === 'я') {

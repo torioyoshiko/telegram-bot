@@ -25,7 +25,7 @@ bot.hears('дед конфа', (ctx) => ctx.reply(Buffer.from('0L/QvtGI0LXQuyDQv
 bot.hears(/на заре/i, (ctx) => ctx.replyWithVoice({ source: 'na-zare.ogg' }, { reply_to_message_id: ctx.message.message_id }));
 bot.hears(Buffer.from('0LjQtNC4INC90LDRhdGD0Lk=', 'base64').toString('utf-8'), (ctx) => ctx.reply('сам пошел', { reply_to_message_id: ctx.message.message_id }));
 
-bot.hears(/Дед,(.*) ли мне (.*)\?/, (ctx) => {
+bot.hears(/Дед,(.*) ли мне (.*)\?/i, (ctx) => {
   if (randomInteger(1, 10) > 5) {
     ctx.reply(noYouDontWantTo(ctx.message.text), { reply_to_message_id: ctx.message.message_id });
   } else {
@@ -33,7 +33,7 @@ bot.hears(/Дед,(.*) ли мне (.*)\?/, (ctx) => {
   }
 });
 
-bot.hears(/Дед, (.*) или (.*)\?/, (ctx) => {
+bot.hears(/Дед, (.*) или (.*)\?/i, (ctx) => {
   if (randomInteger(1, 10) > 5) {
     ctx.reply(thisOrThisFirst(ctx.message.text), { reply_to_message_id: ctx.message.message_id });
   } else {
@@ -41,7 +41,7 @@ bot.hears(/Дед, (.*) или (.*)\?/, (ctx) => {
   }
 });
 
-bot.hears(/Дед, (.*) ли (.*)\?/, (ctx) => {
+bot.hears(/Дед, (.*) ли (.*)\?/i, (ctx) => {
   if (ctx.message.text.indexOf('хочу') === -1) {
     if (randomInteger(1, 10) > 5) {
       ctx.reply(noYouAreNot(ctx.message.text), { reply_to_message_id: ctx.message.message_id });

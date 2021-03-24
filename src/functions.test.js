@@ -16,7 +16,7 @@ describe('functions.js', () => {
     });
 
     test('NoYouDontWantTo -- Дед, выпить ли мне чаю? -> Тебе чаю не выпить', () => {
-      expect(noYouDontWantTo('Дед, выпить ли мне чаю?')).toBe('Тебе чаю не выпить');
+      expect(noYouDontWantTo('дед, выпить ли мне чаю?')).toBe('Тебе чаю не выпить');
     });
   });
 
@@ -26,17 +26,17 @@ describe('functions.js', () => {
     });
 
     test('ThisOrThatSecond -- Дед, черное или белое? -> белое', () => {
-      expect(thisOrThisSecond('Дед, черное или белое?')).toBe('белое');
+      expect(thisOrThisSecond('дед, черное или белое?')).toBe('белое');
     });
   });
 
   describe('He is?', () => {
     test('YesHeIs -- Дед, жаба ли я? -> ты жаба', () => {
-      expect(yesYouAre('Дед, жаба ли я?')).toBe('ты жаба');
+      expect(yesYouAre('дед, жаба ли я?')).toBe('ты жаба');
     });
 
     test('NoHeisnt -- Дед, жаба ли я? -> ты ни разу не жаба', () => {
-      expect(noYouAreNot('Дед, жаба ли я?')).toBe('ты ни разу не жаба');
+      expect(noYouAreNot('дед, жаба ли я?')).toBe('ты ни разу не жаба');
     });
   });
 
@@ -46,7 +46,7 @@ describe('functions.js', () => {
     });
 
     test('NoYouDontWantIt -- Дед, хочу ли я чаю? -> ты ни разу не хочешь чаю', () => {
-      expect(noYouDontWantIt('Дед, хочу ли я чаю?')).toBe('ты ни разу не хочешь чаю');
+      expect(noYouDontWantIt('дед, хочу ли я чаю?')).toBe('ты ни разу не хочешь чаю');
     });
   });
 });
