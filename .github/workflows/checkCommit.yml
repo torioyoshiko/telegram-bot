@@ -10,3 +10,4 @@ jobs:
       - uses: actions/setup-node@v1
       - run: npm i
       - run: npm test
+      - run: npm run lint
