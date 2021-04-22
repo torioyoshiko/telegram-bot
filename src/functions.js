@@ -104,7 +104,7 @@ export const weather = async (str) => {
   const response = await fetch(url);
   const weatherObj = await response.json();
 
-  if (weatherObj.cod === '404') {
+  if (weatherObj.cod === '404' || weatherObj.cod === '404') {
     return 'Таких городов не знаем';
   }
 
