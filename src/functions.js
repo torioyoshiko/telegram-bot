@@ -1,3 +1,7 @@
+import fetch from "node-fetch";
+
+const weatherKey = process.env.WEATHER_KEY;
+
 export const noYouDontWantTo = (str) => {
   const re = new RegExp(/Дед,(.*) ли мне (.*)\?/i);
   const words = str.match(re);
@@ -87,3 +91,30 @@ export const noYouDontWantIt = (str) => {
 
   return `${words[3]} ни разу не ${words[1]} ${words[2]}`;
 };
+
+//Дед, погода *город*
+export const weather = async (str) => {
+  try {
+
+    const re = new RegExp(/Дед, погода( в)? (.*)/i);
+    const words = str.match(re);
+
+    let city = words[2]
+    let encodeCity = encodeURIComponent(city)
+
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeCity}&appid=${weatherKey}`
+    let response = await fetch(url)
+    let weatherObj = await response.json()
+    if (weatherObj.cod === '404'){
+      return `Таких городов не знаем`
+    } else {
+
+      let mainTemp = weatherObj.main.temp;
+      let temp = mainTemp - 273.15;
+
+      return `Щас там ${Math.floor(temp)}°C.`
+    }
+  } catch (e) {
+    console.log(e)
+  }
+}

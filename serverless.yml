@@ -16,6 +16,7 @@ functions:
       - http: POST /
     environment:
       TELEGRAM_TOKEN: ${ssm:telegram-bot-token}
+      WEATHER_KEY: ${ssm:weather-key}
 
 package:
   individually: true
