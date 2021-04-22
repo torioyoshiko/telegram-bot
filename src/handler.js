@@ -7,7 +7,7 @@ import {
   yesYouAre,
   noYouAreNot,
   youWantIt,
-  noYouDontWantIt,
+  noYouDontWantIt, weather,
 } from './functions';
 
 const telegramToken = process.env.TELEGRAM_TOKEN;
@@ -24,6 +24,7 @@ bot.hears(Buffer.from('0JTQtdC0LCDQv9C40LTQvtGAINC70Lgg0YLRiz8=\n', 'base64').to
 bot.hears('дед конфа', (ctx) => ctx.reply(Buffer.from('0L/QvtGI0LXQuyDQvdCw0YXRg9C5', 'base64').toString('utf-8'), { reply_to_message_id: ctx.message.message_id }));
 bot.hears(/на заре/i, (ctx) => ctx.replyWithVoice({ source: 'na-zare.ogg' }, { reply_to_message_id: ctx.message.message_id }));
 bot.hears(Buffer.from('0LjQtNC4INC90LDRhdGD0Lk=', 'base64').toString('utf-8'), (ctx) => ctx.reply('сам пошел', { reply_to_message_id: ctx.message.message_id }));
+bot.hears(/Дед, погода (.*)/, async (ctx) => ctx.reply(await weather(ctx.message.text), { reply_to_message_id: ctx.message.message_id }));
 
 bot.hears(/Дед,(.*) ли мне (.*)\?/i, (ctx) => {
   if (randomInteger(1, 10) > 5) {
