@@ -65,6 +65,7 @@ export const handleMessage = async (event) => {
     await bot.handleUpdate(body);
     return { body: JSON.stringify({ body }), statusCode: 200 };
   } catch (e) {
+    console.log(e)
     return {
       body: JSON.stringify({ message: 'Something went wrong' }),
       statusCode: 200,
