@@ -6,7 +6,7 @@ import {
   yesYouAre,
   noYouAreNot,
   youWantIt,
-  noYouDontWantIt
+  noYouDontWantIt,
 } from './functions';
 
 describe('functions.js', () => {
