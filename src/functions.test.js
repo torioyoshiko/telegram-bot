@@ -6,7 +6,7 @@ import {
   yesYouAre,
   noYouAreNot,
   youWantIt,
-  noYouDontWantIt,
+  noYouDontWantIt, forecast,
 } from './functions';
 
 describe('functions.js', () => {
@@ -49,4 +49,11 @@ describe('functions.js', () => {
       expect(noYouDontWantIt('дед, хочу ли я чаю?')).toBe('ты ни разу не хочешь чаю');
     });
   });
+
+  describe('weather and forecast', () => {
+    test('forecast -- Дед, прогноз минск -> я чет получил', async () => {
+      const x = await forecast('Дед, прогноз минск')
+      expect(x).toBe('я чет получил')
+    })
+  })
 });

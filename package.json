@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "eslint-config-airbnb": "^18.2.1",
+    "luxon": "^1.26.0",
     "node-fetch": "^2.6.1",
     "telegraf": "^4.3.0",
     "webpack-node-externals": "^2.5.2"
@@ -27,6 +28,7 @@
     "eslint-plugin-import": "^2.22.1",
     "jest": "^26.6.3",
     "serverless-webpack": "^5.2.0",
+    "typescript": "^4.2.4",
     "webpack": "^4.46.0",
     "webpack-node-externals": "^1.7.2"
   }
