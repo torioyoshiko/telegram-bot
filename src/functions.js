@@ -114,7 +114,7 @@ export const forecast = async (str) => {
   const mainTemp = weatherObjToday.main.temp;
   const temp = mainTemp - 273.15;
 
-  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${encodeCity}&appid=94e3d6b0c8dec89a5b502795cf858064`;
+  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${encodeCity}&appid=${weatherKey}`;
   const response = await fetch(url);
   const forecastAllInfo = await response.json();
 
