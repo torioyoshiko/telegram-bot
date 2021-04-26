@@ -25,7 +25,6 @@ bot.hears('дед конфа', (ctx) => ctx.reply(Buffer.from('0L/QvtGI0LXQuyDQv
 bot.hears(/на заре/i, (ctx) => ctx.replyWithVoice({ source: 'na-zare.ogg' }, { reply_to_message_id: ctx.message.message_id }));
 bot.hears(/Дед, погода (.*)/, async (ctx) => ctx.reply(await forecast(ctx.message.text), { reply_to_message_id: ctx.message.message_id }));
 
-
 bot.hears(/Дед,(.*) ли мне (.*)\?/i, (ctx) => {
   if (randomInteger(1, 10) > 5) {
     ctx.reply(noYouDontWantTo(ctx.message.text), { reply_to_message_id: ctx.message.message_id });

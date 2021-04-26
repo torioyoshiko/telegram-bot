@@ -52,8 +52,8 @@ describe('functions.js', () => {
 
   describe('weather and forecast', () => {
     test('forecast -- Дед, прогноз минск -> я чет получил', async () => {
-      const x = await forecast('Дед, прогноз минск')
-      expect(x).toBe('я чет получил')
-    })
-  })
+      const x = await forecast('Дед, прогноз минск');
+      expect(x).toBe('я чет получил');
+    });
+  });
 });
