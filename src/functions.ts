@@ -3,7 +3,7 @@ import { DateTime } from 'luxon';
 
 const weatherKey = process.env.WEATHER_KEY;
 
-export const noYouDontWantTo = (str) => {
+export const noYouDontWantTo = (str: string) => {
   const re = new RegExp(/Дед,(.*) ли мне (.*)\?/i);
   const words = str.match(re);
 
@@ -14,7 +14,7 @@ export const noYouDontWantTo = (str) => {
   return `Тебе ${words[2]} не${words[1]}`;
 };
 
-export const yesYouWantTo = (str) => {
+export const yesYouWantTo = (str: string) => {
   const re = new RegExp(/Дед,(.*) ли мне (.*)\?/i);
   const words = str.match(re);
 
@@ -25,21 +25,21 @@ export const yesYouWantTo = (str) => {
   return `Тебе ${words[2]}${words[1]}`;
 };
 
-export const thisOrThisFirst = (str) => {
+export const thisOrThisFirst = (str: string) => {
   const re = new RegExp(/Дед, (.*) или (.*)\?/i);
   const words = str.match(re);
 
   return words[1];
 };
 
-export const thisOrThisSecond = (str) => {
+export const thisOrThisSecond = (str: string) => {
   const re = new RegExp(/Дед, (.*) или (.*)\?/i);
   const words = str.match(re);
 
   return words[2];
 };
 
-export const yesYouAre = (str) => {
+export const yesYouAre = (str: string) => {
   const re = new RegExp(/Дед, (.*) ли (.*)\?/i);
   const words = str.match(re);
 
@@ -50,7 +50,7 @@ export const yesYouAre = (str) => {
   return `${words[2]} ${words[1]}`;
 };
 
-export const noYouAreNot = (str) => {
+export const noYouAreNot = (str: string) => {
   const re = new RegExp(/Дед, (.*) ли (.*)\?/i);
   const words = str.match(re);
 
@@ -61,7 +61,7 @@ export const noYouAreNot = (str) => {
   return `${words[2]} ни разу не ${words[1]}`;
 };
 
-export const youWantIt = (str) => {
+export const youWantIt = (str: string) => {
   const re = new RegExp(/Дед, (.*) ли (.*)\?/i);
   const words = str.match(re);
 
@@ -77,7 +77,7 @@ export const youWantIt = (str) => {
   return `${words[3]} ${words[1]} ${words[2]}`;
 };
 
-export const noYouDontWantIt = (str) => {
+export const noYouDontWantIt = (str: string) => {
   const re = new RegExp(/Дед, (.*) ли (.*)\?/i);
   const words = str.match(re);
 
@@ -93,7 +93,7 @@ export const noYouDontWantIt = (str) => {
   return `${words[3]} ни разу не ${words[1]} ${words[2]}`;
 };
 
-export const forecast = async (str) => {
+export const forecast = async (str: string) => {
   const re = new RegExp(/Дед, погода( в)? (.*)/i);
   const words = str.match(re);
   const tomorrow = DateTime.now().startOf('day').plus({ day: 1 }).toMillis() / 1000;

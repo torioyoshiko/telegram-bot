@@ -22,11 +22,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
+        test: /\.ts?$/,
+        loader: 'ts-loader',
         include: __dirname,
         exclude: /node_modules/,
       },
     ],
   },
+  resolve:{
+    extensions:['.ts','.tsx']
+},
 };

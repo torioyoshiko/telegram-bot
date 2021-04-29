@@ -9,7 +9,7 @@ import {
   noYouDontWantIt,
 } from './functions';
 
-describe('functions.js', () => {
+describe('functions.ts', () => {
   describe('Дед, выпить ли мне чаю?', () => {
     test('YesYouWantTo -- Дед, выпить ли мне чаю? -> Тебе чаю выпить', () => {
       expect(yesYouWantTo('Дед, выпить ли мне чаю?')).toBe('Тебе чаю выпить');

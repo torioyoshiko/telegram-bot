@@ -2,7 +2,7 @@
   "name": "telegram-bot-serverless",
   "version": "1.0.0",
   "description": "",
-  "main": "src/handler.js",
+  "main": "src/handler.ts",
   "scripts": {
     "test": "jest",
     "lint": "eslint src",
@@ -11,16 +11,21 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
     "eslint-config-airbnb": "^18.2.1",
     "luxon": "^1.26.0",
+    "module-alias": "^2.2.2",
     "node-fetch": "^2.6.1",
     "telegraf": "^4.3.0",
+    "ts-jest": "^26.5.5",
     "webpack-node-externals": "^2.5.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.1",
     "@babel/preset-env": "^7.0.0",
+    "@types/jest": "^26.0.23",
+    "@typescript-eslint/parser": "^4.22.0",
     "babel-loader": "^8.0.0",
     "babel-plugin-source-map-support": "^2.0.1",
     "copy-webpack-plugin": "^5.1.2",
@@ -28,8 +33,9 @@
     "eslint-plugin-import": "^2.22.1",
     "jest": "^26.6.3",
     "serverless-webpack": "^5.2.0",
+    "ts-loader": "^9.1.1",
     "typescript": "^4.2.4",
-    "webpack": "^4.46.0",
+    "webpack": "^5.36.0",
     "webpack-node-externals": "^1.7.2"
   }
 }
