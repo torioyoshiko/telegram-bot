@@ -1,4 +1,5 @@
 import { Telegraf } from 'telegraf';
+import { APIGatewayProxyEvent } from 'aws-lambda';
 import {
   yesYouWantTo,
   noYouDontWantTo,
@@ -58,12 +59,13 @@ bot.hears(/Дед, (.*) ли (.*)\?/i, (ctx) => {
   }
 });
 
-export const handleMessage = async (event) => {
+export const handleMessage = async (event: APIGatewayProxyEvent) => {
   try {
     const body = event.body ? JSON.parse(event.body) : event;
     await bot.handleUpdate(body);
     return { body: JSON.stringify({ body }), statusCode: 200 };
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(e);
     return {
       body: JSON.stringify({ message: 'Something went wrong' }),

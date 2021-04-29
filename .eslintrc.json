@@ -30,6 +30,15 @@
         "ecmaVersion": 2018
     },
     "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "import/no-unresolved": [
+            "error",
+            {
+                "ignore": [
+                    "aws-lambda"
+                ]
+            }
+        ],
         "import/prefer-default-export": "off",
         "linebreak-style": "off",
         "no-plusplus": "off",
