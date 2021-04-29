@@ -1,4 +1,3 @@
-// @ts-ignore
 import { Telegraf } from 'telegraf';
 import {
   yesYouWantTo,

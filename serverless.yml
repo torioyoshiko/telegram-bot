@@ -15,7 +15,7 @@ functions:
       - http: GET /
       - http: POST /
     environment:
-      TELEGRAM_TOKEN: ${ssm:telegram-bot-token}
+      TELEGRAM_TOKEN: ${ssm:${self:custom.stage}-telegram-token}
       WEATHER_KEY: ${ssm:weather-key}
 
 package:
@@ -27,6 +27,7 @@ plugins:
   - serverless-webpack
 
 custom:
+  stage: ${opt:stage, self:provider.stage}
   webpack:
     webpackConfig: webpack.config.js
     includeModules: true
