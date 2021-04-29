@@ -10,8 +10,8 @@ module.exports = {
   mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
   plugins: [
     new CopyWebpackPlugin([
-      'na-zare.ogg'
-    ])
+      'na-zare.ogg',
+    ]),
   ],
   optimization: {
     minimize: false,
@@ -29,7 +29,7 @@ module.exports = {
       },
     ],
   },
-  resolve:{
-    extensions:['.ts','.tsx']
-},
+  resolve: {
+    extensions: ['.ts', '.tsx'],
+  },
 };

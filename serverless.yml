@@ -29,5 +29,5 @@ plugins:
 custom:
   stage: ${opt:stage, self:provider.stage}
   webpack:
-    webpackConfig: webpack.config.js
+    webpackConfig: webpack.config.ts
     includeModules: true
