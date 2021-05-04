@@ -21,10 +21,19 @@ const randomInteger = (min, max) => {
 
 bot.start((ctx) => ctx.reply(`Привет, ${ctx.from.first_name}`));
 bot.hears('Дед', (ctx) => ctx.reply('Че те надо', { reply_to_message_id: ctx.message.message_id }));
-bot.hears(Buffer.from('0JTQtdC0LCDQv9C40LTQvtGAINC70Lgg0YLRiz8=\n', 'base64').toString('utf-8'), (ctx) => ctx.reply(Buffer.from('0KHQsNC8INGC0Ysg0L/QuNC00L7RgA==\n', 'base64').toString('utf-8'), { reply_to_message_id: ctx.message.message_id }));
 bot.hears('дед конфа', (ctx) => ctx.reply(Buffer.from('0L/QvtGI0LXQuyDQvdCw0YXRg9C5', 'base64').toString('utf-8'), { reply_to_message_id: ctx.message.message_id }));
 bot.hears(/на заре/i, (ctx) => ctx.replyWithVoice({ source: 'na-zare.ogg' }, { reply_to_message_id: ctx.message.message_id }));
 bot.hears(/Дед, погода (.*)/, async (ctx) => ctx.reply(await forecast(ctx.message.text), { reply_to_message_id: ctx.message.message_id }));
+
+bot.hears('/help', (ctx) => ctx.reply(
+  '1. Дед.\n'
+    + '\n2. на заре.\n'
+    + '\n3. Дед, погода *город*.\n Например: Дед, погода стокгольм \n'
+    + '\n4. Дед, *глагол* ли мне *что-то?\n Например: Дед, выпить ли мне чаю?\n'
+    + '\n5. Дед, *что-то* или *что-то*?\n Например: Дед, черное или белое?\n'
+    + '\n6. Дед, *что-то* ли *что-то*?\n Например: Дед, желтое ли такси?\n',
+  { reply_to_message_id: ctx.message.message_id },
+));
 
 bot.hears(/Дед,(.*) ли мне (.*)\?/i, (ctx) => {
   if (randomInteger(1, 10) > 5) {
