@@ -3,11 +3,10 @@ import fetch from 'node-fetch';
 const getRandomArbitrary = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
 export const animeRandomizer = async () => {
-  const url = 'https://api.jikan.moe/v3/top/anime/';
   const page = getRandomArbitrary(1, 100);
   const anime = getRandomArbitrary(1, 52);
 
-  const response = await fetch(url + page.toString());
+  const response = await fetch(`https://api.jikan.moe/v3/top/anime/${page.toString()}`);
   const animeList = await response.json();
 
   const finalResult = animeList.top[anime];
