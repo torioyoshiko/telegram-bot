@@ -10,6 +10,7 @@ import {
   youWantIt,
   noYouDontWantIt, forecast,
 } from './functions';
+import { animeRandomizer } from './anime-random';
 
 const telegramToken = process.env.TELEGRAM_TOKEN;
 const bot = new Telegraf(telegramToken);
@@ -20,10 +21,13 @@ const randomInteger = (min, max) => {
 };
 
 bot.start((ctx) => ctx.reply(`Привет, ${ctx.from.first_name}`));
-bot.hears('Дед', (ctx) => ctx.reply('Че те надо', { reply_to_message_id: ctx.message.message_id }));
 bot.hears('дед конфа', (ctx) => ctx.reply(Buffer.from('0L/QvtGI0LXQuyDQvdCw0YXRg9C5', 'base64').toString('utf-8'), { reply_to_message_id: ctx.message.message_id }));
 bot.hears(/на заре/i, (ctx) => ctx.replyWithVoice({ source: 'na-zare.ogg' }, { reply_to_message_id: ctx.message.message_id }));
-bot.hears(/Дед, погода (.*)/, async (ctx) => ctx.reply(await forecast(ctx.message.text), { reply_to_message_id: ctx.message.message_id }));
+bot.hears(/Дед, погода (.*)/i, async (ctx) => ctx.reply(await forecast(ctx.message.text), { reply_to_message_id: ctx.message.message_id }));
+bot.hears(/Дед, рандомное аниме/i, async (ctx) => {
+  const result = await animeRandomizer();
+  ctx.replyWithMarkdown(result, { reply_to_message_id: ctx.message.message_id });
+});
 
 bot.hears('/help', (ctx) => ctx.reply(
   '1. Дед.\n'
@@ -31,7 +35,8 @@ bot.hears('/help', (ctx) => ctx.reply(
     + '\n3. Дед, погода *город*.\n Например: Дед, погода стокгольм \n'
     + '\n4. Дед, *глагол* ли мне *что-то?\n Например: Дед, выпить ли мне чаю?\n'
     + '\n5. Дед, *что-то* или *что-то*?\n Например: Дед, черное или белое?\n'
-    + '\n6. Дед, *что-то* ли *что-то*?\n Например: Дед, желтое ли такси?\n',
+    + '\n6. Дед, *что-то* ли *что-то*?\n Например: Дед, желтое ли такси?\n'
+    + '\n7. Дед, рандомное аниме\n',
   { reply_to_message_id: ctx.message.message_id },
 ));
 
@@ -67,6 +72,8 @@ bot.hears(/Дед, (.*) ли (.*)\?/i, (ctx) => {
     ctx.reply(youWantIt(ctx.message.text), { reply_to_message_id: ctx.message.message_id });
   }
 });
+
+bot.hears(/Дед/i, (ctx) => ctx.reply('Че те надо', { reply_to_message_id: ctx.message.message_id }));
 
 export const handleMessage = async (event: APIGatewayProxyEvent) => {
   try {
