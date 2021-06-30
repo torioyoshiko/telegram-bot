@@ -107,7 +107,7 @@ export const forecast = async (str: string) => {
   const responseToday = await fetch(urlToday);
   const weatherObjToday = await responseToday.json();
 
-  if (weatherObjToday.cod === '404' || weatherObjToday.cod === '404') {
+  if (weatherObjToday.cod === '404' || weatherObjToday.cod === 401) {
     return 'Таких городов не знаем';
   }
 
@@ -146,6 +146,6 @@ export const forecast = async (str: string) => {
   const dayAfterTomorrowNightTemperature = Math.floor(Math.min(...dayAfterTomorrowArrMin) - 273.15);
 
   return `Прям щас там ${Math.floor(temp)}°C.
-Завтра будет от ${tomorrowNightTemperature}°C до ${tomorrowDayTemperature}°C. 
-А послезавтра будет от ${dayAfterTomorrowNightTemperature}°C до ${dayAfterTomorrowDayTemperature}°C.`;
+Завтра ночью будет от ${tomorrowNightTemperature}°C, а днем до ${tomorrowDayTemperature}°C. 
+Послезавтра ночью будет от ${dayAfterTomorrowNightTemperature}°C, а днем до ${dayAfterTomorrowDayTemperature}°C.`;
 };

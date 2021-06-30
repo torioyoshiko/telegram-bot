@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint src",
-    "lint:fix": "eslint src --fix"
+    "lint:fix": "eslint src --fix",
+    "tsc": "tsc --noEmit"
   },
   "author": "",
   "license": "ISC",
@@ -26,6 +27,8 @@
     "@babel/preset-env": "^7.0.0",
     "@types/aws-lambda": "^8.10.76",
     "@types/jest": "^26.0.23",
+    "@types/node": "^10.17.60",
+    "@types/node-fetch": "^2.5.10",
     "@typescript-eslint/parser": "^4.22.0",
     "babel-loader": "^8.0.0",
     "babel-plugin-source-map-support": "^2.0.1",
