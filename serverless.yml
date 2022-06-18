@@ -1,6 +1,6 @@
 service: telegram-bot-serverless
 
-frameworkVersion: '2'
+frameworkVersion: '3'
 
 provider:
   name: aws
@@ -15,8 +15,9 @@ functions:
       - http: GET /
       - http: POST /
     environment:
-      TELEGRAM_TOKEN: ${ssm:${self:custom.stage}-telegram-token}
+      TELEGRAM_TOKEN: ${ssm:${sls:stage}-telegram-token}
       WEATHER_KEY: ${ssm:weather-key}
+      TRANSLATE_KEY: ${ssm:translate-key}
 
 package:
   individually: true
@@ -27,7 +28,6 @@ plugins:
   - serverless-webpack
 
 custom:
-  stage: ${opt:stage, self:provider.stage}
   webpack:
     webpackConfig: webpack.config.ts
     includeModules: true

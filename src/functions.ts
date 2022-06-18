@@ -2,6 +2,7 @@ import fetch from 'node-fetch';
 import { DateTime } from 'luxon';
 
 const weatherKey = process.env.WEATHER_KEY;
+const translateKey = process.env.TRANSLATE_KEY;
 
 export const noYouDontWantTo = (str: string) => {
   const re = new RegExp(/Дед,(.*) ли мне (.*)\?/i);
@@ -94,14 +95,22 @@ export const noYouDontWantIt = (str: string) => {
 };
 
 export const forecast = async (str: string) => {
-  const re = new RegExp(/Дед, погода( в)? (.*)/i);
+  const re = new RegExp(/Д[еіi]д, погода( в)? (.*)/i);
   const words = str.match(re);
   const tomorrow = DateTime.now().startOf('day').plus({ day: 1 }).toMillis() / 1000;
   const dayAfterTomorrow = DateTime.now().startOf('day').plus({ day: 2 }).toMillis() / 1000;
   const thirdDay = DateTime.now().startOf('day').plus({ day: 3 }).toMillis() / 1000;
 
   const city = words[2];
-  const encodeCity = encodeURIComponent(city);
+  const translate = `https://translation.googleapis.com/language/translate/v2?key=${translateKey}&target=en&q=${city}`;
+  const responseTranslate = await fetch(translate);
+  const translateResponseJson = await responseTranslate.json();
+  const translatedCity = translateResponseJson?.data?.translations?.[0]?.translatedText;
+
+  if (!translatedCity) {
+    return 'Таких городов не знаем';
+  }
+  const encodeCity = encodeURIComponent(translatedCity);
 
   const urlToday = `https://api.openweathermap.org/data/2.5/weather?q=${encodeCity}&appid=${weatherKey}`;
   const responseToday = await fetch(urlToday);
@@ -144,6 +153,12 @@ export const forecast = async (str: string) => {
 
   const dayAfterTomorrowDayTemperature = Math.floor(Math.max(...dayAfterTomorrowArrHigh) - 273.15);
   const dayAfterTomorrowNightTemperature = Math.floor(Math.min(...dayAfterTomorrowArrMin) - 273.15);
+
+  if (translateResponseJson?.data?.translations?.[0]?.detectedSourceLanguage === 'uk') {
+    return `На разі там ${Math.floor(temp)}°C.
+Завтра вночі буде від ${tomorrowNightTemperature}°C, а вдень до ${tomorrowDayTemperature}°C. 
+Післязавтра вночі буде від ${dayAfterTomorrowNightTemperature}°C, а вдень до ${dayAfterTomorrowDayTemperature}°C.`;
+  }
 
   return `Прям щас там ${Math.floor(temp)}°C.
 Завтра ночью будет от ${tomorrowNightTemperature}°C, а днем до ${tomorrowDayTemperature}°C. 
