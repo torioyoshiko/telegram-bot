@@ -88,6 +88,17 @@ describe('functions.ts', () => {
       mockedFetch.mockReturnValueOnce(Promise.resolve({
         json() {
           return {
+            data: {
+              translations: [{
+                translatedText: 'minsk',
+              }],
+            },
+          };
+        },
+      }));
+      mockedFetch.mockReturnValueOnce(Promise.resolve({
+        json() {
+          return {
             coord: {
               lon: 27.5667,
               lat: 53.9,
