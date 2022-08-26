@@ -37,7 +37,7 @@ export const thisOrThisSecond = (str: string) => {
   const re = new RegExp(/Д[еіi]д, (.*) (или|чи) (.*)\?/i);
   const words = str.match(re);
 
-  return words[2];
+  return words[3];
 };
 
 export const yesYouAre = (str: string) => {
