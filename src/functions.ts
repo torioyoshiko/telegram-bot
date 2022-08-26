@@ -5,7 +5,7 @@ const weatherKey = process.env.WEATHER_KEY;
 const translateKey = process.env.TRANSLATE_KEY;
 
 export const noYouDontWantTo = (str: string) => {
-  const re = new RegExp(/Дед,(.*) ли мне (.*)\?/i);
+  const re = new RegExp(/Д[еіi]д,(.*) ли мне (.*)\?/i);
   const words = str.match(re);
 
   if (words[2] === 'я') {
@@ -16,7 +16,7 @@ export const noYouDontWantTo = (str: string) => {
 };
 
 export const yesYouWantTo = (str: string) => {
-  const re = new RegExp(/Дед,(.*) ли мне (.*)\?/i);
+  const re = new RegExp(/Д[еіi]д,(.*) ли мне (.*)\?/i);
   const words = str.match(re);
 
   if (words[2] === 'я') {
@@ -27,21 +27,21 @@ export const yesYouWantTo = (str: string) => {
 };
 
 export const thisOrThisFirst = (str: string) => {
-  const re = new RegExp(/Дед, (.*) или (.*)\?/i);
+  const re = new RegExp(/Д[еіi]д, (.*) (или|чи) (.*)\?/i);
   const words = str.match(re);
 
   return words[1];
 };
 
 export const thisOrThisSecond = (str: string) => {
-  const re = new RegExp(/Дед, (.*) или (.*)\?/i);
+  const re = new RegExp(/Д[еіi]д, (.*) (или|чи) (.*)\?/i);
   const words = str.match(re);
 
   return words[2];
 };
 
 export const yesYouAre = (str: string) => {
-  const re = new RegExp(/Дед, (.*) ли (.*)\?/i);
+  const re = new RegExp(/Д[еіi]д, (.*) ли (.*)\?/i);
   const words = str.match(re);
 
   if (words[2] === 'я') {
@@ -52,7 +52,7 @@ export const yesYouAre = (str: string) => {
 };
 
 export const noYouAreNot = (str: string) => {
-  const re = new RegExp(/Дед, (.*) ли (.*)\?/i);
+  const re = new RegExp(/Д[еіi]д, (.*) ли (.*)\?/i);
   const words = str.match(re);
 
   if (words[2] === 'я') {
@@ -63,7 +63,7 @@ export const noYouAreNot = (str: string) => {
 };
 
 export const youWantIt = (str: string) => {
-  const re = new RegExp(/Дед, (.*) ли (.*)\?/i);
+  const re = new RegExp(/Д[еіi]д, (.*) ли (.*)\?/i);
   const words = str.match(re);
 
   if (words[2][0] === 'я') {
@@ -79,7 +79,7 @@ export const youWantIt = (str: string) => {
 };
 
 export const noYouDontWantIt = (str: string) => {
-  const re = new RegExp(/Дед, (.*) ли (.*)\?/i);
+  const re = new RegExp(/Д[еіi]д, (.*) ли (.*)\?/i);
   const words = str.match(re);
 
   if (words[2][0] === 'я') {
@@ -163,4 +163,16 @@ export const forecast = async (str: string) => {
   return `Прям щас там ${Math.floor(temp)}°C.
 Завтра ночью будет от ${tomorrowNightTemperature}°C, а днем до ${tomorrowDayTemperature}°C. 
 Послезавтра ночью будет от ${dayAfterTomorrowNightTemperature}°C, а днем до ${dayAfterTomorrowDayTemperature}°C.`;
+};
+
+export const jokes = async () => {
+  const response = await fetch('https://backend-omega-seven.vercel.app/api/getjoke');
+  const jokeArr = await response.json();
+  const { question, punchline } = jokeArr[0];
+
+  return `${question}
+  .
+  .
+  .
+${punchline}`;
 };

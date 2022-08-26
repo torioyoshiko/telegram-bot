@@ -8,7 +8,7 @@ import {
   yesYouAre,
   noYouAreNot,
   youWantIt,
-  noYouDontWantIt, forecast,
+  noYouDontWantIt, forecast, jokes,
 } from './functions';
 import { animeRandomizer } from './anime-random';
 
@@ -40,7 +40,9 @@ bot.hears(/\/help(@oldguybot)?/i, (ctx) => ctx.reply(
   { reply_to_message_id: ctx.message.message_id },
 ));
 
-bot.hears(/Дед,(.*) ли мне (.*)\?/i, (ctx) => {
+bot.hears(/\/joke(@oldguybot)?/i, async (ctx) => ctx.reply(await jokes()));
+
+bot.hears(/Д[еіi]д,(.*) ли мне (.*)\?/i, (ctx) => {
   if (randomInteger(1, 10) > 5) {
     ctx.reply(noYouDontWantTo(ctx.message.text), { reply_to_message_id: ctx.message.message_id });
   } else {
@@ -48,7 +50,7 @@ bot.hears(/Дед,(.*) ли мне (.*)\?/i, (ctx) => {
   }
 });
 
-bot.hears(/Дед, (.*) или (.*)\?/i, (ctx) => {
+bot.hears(/Д[еіi]д, (.*) (или|чи) (.*)\?/i, (ctx) => {
   if (randomInteger(1, 10) > 5) {
     ctx.reply(thisOrThisFirst(ctx.message.text), { reply_to_message_id: ctx.message.message_id });
   } else {
@@ -56,7 +58,7 @@ bot.hears(/Дед, (.*) или (.*)\?/i, (ctx) => {
   }
 });
 
-bot.hears(/Дед, (.*) ли (.*)\?/i, (ctx) => {
+bot.hears(/Д[еіi]д, (.*) ли (.*)\?/i, (ctx) => {
   if (ctx.message.text.indexOf('хочу') === -1) {
     if (randomInteger(1, 10) > 5) {
       ctx.reply(noYouAreNot(ctx.message.text), { reply_to_message_id: ctx.message.message_id });
@@ -73,7 +75,7 @@ bot.hears(/Дед, (.*) ли (.*)\?/i, (ctx) => {
   }
 });
 
-bot.hears(/Дед/, (ctx) => ctx.reply('Че те надо', { reply_to_message_id: ctx.message.message_id }));
+bot.hears(/Д[еіi]д/, (ctx) => ctx.reply('Че те надо', { reply_to_message_id: ctx.message.message_id }));
 
 export const handleMessage = async (event: APIGatewayProxyEvent) => {
   try {
