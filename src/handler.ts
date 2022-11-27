@@ -11,6 +11,7 @@ import {
   noYouDontWantIt, forecast, jokes,
 } from './functions';
 import { animeRandomizer } from './anime-random';
+import { addUserShip, createShip } from './shippering';
 
 const telegramToken = process.env.TELEGRAM_TOKEN;
 const bot = new Telegraf(telegramToken);
@@ -26,7 +27,7 @@ bot.hears(/на заре/i, (ctx) => ctx.replyWithVoice({ source: 'na-zare.ogg' 
 bot.hears(/Д[еіi]д, погода (.*)/i, async (ctx) => ctx.reply(await forecast(ctx.message.text), { reply_to_message_id: ctx.message.message_id }));
 bot.hears(/Д[еіi]д, рандомное аниме/i, async (ctx) => {
   const result = await animeRandomizer();
-  ctx.replyWithMarkdown(result, { reply_to_message_id: ctx.message.message_id });
+  await ctx.replyWithMarkdown(result, { reply_to_message_id: ctx.message.message_id });
 });
 
 bot.hears(/\/help(@oldguybot)?/i, (ctx) => ctx.reply(
@@ -75,7 +76,14 @@ bot.hears(/Д[еіi]д, (.*) ли (.*)\?/i, (ctx) => {
   }
 });
 
-bot.hears(/Д[еіi]д/, (ctx) => ctx.reply('Че те надо', { reply_to_message_id: ctx.message.message_id }));
+bot.hears(/Д[еіi]д, хочу пару/i, async (ctx) => {
+  if (await addUserShip(ctx.message.from, ctx.message.chat.id.toString())) {
+    return ctx.replyWithMarkdown(`[${ctx.message.from.first_name}](tg://user?id=${ctx.message.from.id}), я цябе дадаў.`, { reply_to_message_id: ctx.message.message_id });
+  }
+  return ctx.replyWithMarkdown(`[${ctx.message.from.first_name}](tg://user?id=${ctx.message.from.id}), я цябе ўжо дадаваў.`, { reply_to_message_id: ctx.message.message_id });
+});
+bot.hears(/Д[еіi]д, шип/i, async (ctx) => ctx.replyWithMarkdown(await createShip(ctx.message.chat.id.toString())));
+bot.hears(/Д[еіi]д/i, (ctx) => ctx.reply('Че те надо', { reply_to_message_id: ctx.message.message_id }));
 
 export const handleMessage = async (event: APIGatewayProxyEvent) => {
   try {
