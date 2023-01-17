@@ -176,3 +176,10 @@ export const jokes = async () => {
   .
 ${punchline}`;
 };
+
+export const roll = (str: string) => {
+  const min = Number(str.split(' ')[2]);
+  const max = Number(str.split(' ')[4]);
+
+  return Math.floor(Math.random() * (max - min) + min);
+};

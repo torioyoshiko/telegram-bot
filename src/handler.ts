@@ -8,7 +8,7 @@ import {
   yesYouAre,
   noYouAreNot,
   youWantIt,
-  noYouDontWantIt, forecast, jokes,
+  noYouDontWantIt, forecast, jokes, roll,
 } from './functions';
 import { animeRandomizer } from './anime-random';
 import { addUserShip, createShip } from './shippering';
@@ -29,8 +29,9 @@ bot.hears(/Д[еіi]д, рандомное аниме/i, async (ctx) => {
   const result = await animeRandomizer();
   await ctx.replyWithMarkdown(result, { reply_to_message_id: ctx.message.message_id });
 });
+bot.hears(/Д[еіi]д, от ([0-9]*) до ([0-9]*)/i, (ctx) => ctx.reply(String(roll(ctx.message.text))));
 
-bot.hears(/\/help(@oldguybot)?/i, (ctx) => ctx.reply(
+bot.hears(/\/help@oldguybot?/i, (ctx) => ctx.reply(
   '1. Дед.\n'
     + '\n2. на заре.\n'
     + '\n3. Дед, погода *город*.\n Например: Дед, погода стокгольм \n'
@@ -83,7 +84,6 @@ bot.hears(/Д[еіi]д, хочу пару/i, async (ctx) => {
   return ctx.replyWithMarkdown(`[${ctx.message.from.first_name}](tg://user?id=${ctx.message.from.id}), я цябе ўжо дадаваў.`, { reply_to_message_id: ctx.message.message_id });
 });
 bot.hears(/Д[еіi]д, шип/i, async (ctx) => ctx.replyWithMarkdown(await createShip(ctx.message.chat.id.toString())));
-bot.hears(/Д[еіi]д/i, (ctx) => ctx.reply('Че те надо', { reply_to_message_id: ctx.message.message_id }));
 
 export const handleMessage = async (event: APIGatewayProxyEvent) => {
   try {
