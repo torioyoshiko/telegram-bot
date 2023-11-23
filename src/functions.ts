@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import { DateTime } from 'luxon';
-import { weatherTemplate } from './regex';
 import { last } from 'lodash';
+import { weatherTemplate } from './regex';
 
 const weatherKey = process.env.WEATHER_KEY;
 const translateKey = process.env.TRANSLATE_KEY;
