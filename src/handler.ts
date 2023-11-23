@@ -10,8 +10,8 @@ import {
   youWantIt,
   noYouDontWantIt, forecast, jokes, roll,
 } from './functions';
-import { animeRandomizer } from './anime-random';
 import { addUserShip, createShip } from './shippering';
+import { botName, weatherTemplate } from './regex';
 
 const telegramToken = process.env.TELEGRAM_TOKEN;
 const bot = new Telegraf(telegramToken);
@@ -24,12 +24,8 @@ const randomInteger = (min, max) => {
 bot.start((ctx) => ctx.reply(`Привет, ${ctx.from.first_name}`));
 bot.hears('дед конфа', (ctx) => ctx.reply(Buffer.from('0L/QvtGI0LXQuyDQvdCw0YXRg9C5', 'base64').toString('utf-8'), { reply_to_message_id: ctx.message.message_id }));
 bot.hears(/на заре/i, (ctx) => ctx.replyWithVoice({ source: 'na-zare.ogg' }, { reply_to_message_id: ctx.message.message_id }));
-bot.hears(/Д[еіi]д, погода (.*)/i, async (ctx) => ctx.reply(await forecast(ctx.message.text), { reply_to_message_id: ctx.message.message_id }));
-bot.hears(/Д[еіi]д, рандомное аниме/i, async (ctx) => {
-  const result = await animeRandomizer();
-  await ctx.replyWithMarkdown(result, { reply_to_message_id: ctx.message.message_id });
-});
-bot.hears(/Д[еіi]д, от ([0-9]*) до ([0-9]*)/i, (ctx) => ctx.reply(String(roll(ctx.message.text))));
+bot.hears(new RegExp(weatherTemplate, 'i'), async (ctx) => ctx.reply(await forecast(ctx.message.text), { reply_to_message_id: ctx.message.message_id }));
+bot.hears(new RegExp(`${botName}, (?:от|ад) ([0-9]*) (?:до|да) ([0-9]*)`, 'i'), (ctx) => ctx.reply(String(roll(ctx.message.text))));
 
 bot.hears(/\/help@oldguybot?/i, (ctx) => ctx.reply(
   '1. Дед.\n'
@@ -44,7 +40,7 @@ bot.hears(/\/help@oldguybot?/i, (ctx) => ctx.reply(
 
 bot.hears(/\/joke(@oldguybot)?/i, async (ctx) => ctx.reply(await jokes()));
 
-bot.hears(/Д[еіi]д,(.*) ли мне (.*)\?/i, (ctx) => {
+bot.hears(/Д(з)?[еіi]д,(.*) (ли|ці) мне (.*)\?/i, (ctx) => {
   if (randomInteger(1, 10) > 5) {
     ctx.reply(noYouDontWantTo(ctx.message.text), { reply_to_message_id: ctx.message.message_id });
   } else {

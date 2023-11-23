@@ -1,5 +1,7 @@
 import fetch from 'node-fetch';
 import { DateTime } from 'luxon';
+import { weatherTemplate } from './regex';
+import { last } from 'lodash';
 
 const weatherKey = process.env.WEATHER_KEY;
 const translateKey = process.env.TRANSLATE_KEY;
@@ -95,13 +97,13 @@ export const noYouDontWantIt = (str: string) => {
 };
 
 export const forecast = async (str: string) => {
-  const re = new RegExp(/Д[еіi]д, погода( в)? (.*)/i);
+  const re = new RegExp(weatherTemplate, 'i');
   const words = str.match(re);
   const tomorrow = DateTime.now().startOf('day').plus({ day: 1 }).toMillis() / 1000;
   const dayAfterTomorrow = DateTime.now().startOf('day').plus({ day: 2 }).toMillis() / 1000;
   const thirdDay = DateTime.now().startOf('day').plus({ day: 3 }).toMillis() / 1000;
 
-  const city = words[2];
+  const city = last(words);
   const translate = `https://translation.googleapis.com/language/translate/v2?key=${translateKey}&target=en&q=${city}`;
   const responseTranslate = await fetch(translate);
   const translateResponseJson = await responseTranslate.json();
